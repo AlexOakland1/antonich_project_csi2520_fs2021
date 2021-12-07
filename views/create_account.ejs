@@ -3,13 +3,25 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Make an Account</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="../public/css/style.css">
     </head>
     <body>
-
-        <p>This is a placeholder page.</p>
+        <h1>Cacaphony Chat</h1>
+        <article></article>
+            <div class="login">
+                <p>Create your account</p>
+                <form action="/createaccount" method = "post">
+                    <input type="text" name="username" placeholder="Username..."><br>
+                    <input type="password" name="password" placeholder="Password..."><br>
+                    <input type="submit" value="Login">
+                </form>
+                <p>For security reasons, do NOT use a username or password tied to your real social media accounts.</p>
+                <p>Already have an account?</p>
+                <a href="index.ejs">Login to your account.</i></a>
+            </div>
+        </article>
     </body>
 </html>
