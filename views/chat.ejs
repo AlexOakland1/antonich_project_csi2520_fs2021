@@ -9,21 +9,34 @@
         <link rel="stylesheet" href="../public/css/style.css">
     </head>
     <body>
-        <h1>Cacaphony Chat</h1>
         <article>
-            <div class="chat">
+            <div class="left">
+                <div class="chat">
+                    <p>test 1</p>
+                    <p>test 2</p>
+                    <p>test 3</p>
+                </div>
+                <div class="chatupload">
+                    <form action="/sendmessage" method = "post">
+                        <input type="text" name="chatbox" class="chatbox" placeholder="Chat..."><br>
+                    </form>
+                    <form action="/uploadfile" method = "post">
+                        <input type="button" name="upload" value="Upload">
+                    </form>
+                </div>
             </div>
-            <div class="usernames">
-            </div>
-            <div class="logout">
-            </div>
-            <div class="chatupload">
-                <form action="/sendmessage" method = "post">
-                    <input type="text" name="chatbox" placeholder="Chat..."><br>
-                </form>
-                <form action="/uploadfile" method = "post">
-                    <input type="button" value="Upload">
-                </form>
+            <div class="right">
+                <div class="usernames">
+                    <p>test 1</p>
+                    <p>test 2</p>
+                    <p>test 3</p>
+                </div>
+                <div class="logout">
+                    <p>username</p>
+                    <form action="/logout" method = "post">
+                        <input type="button" name="logout" value="Logout">
+                    </form>
+                </div>
             </div>
         </article>
     </body>

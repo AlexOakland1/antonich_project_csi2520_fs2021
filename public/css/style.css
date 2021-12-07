@@ -50,6 +50,65 @@ a {
   text-decoration: none;
 }
 
-input {
-  width: 100%;
+.left {
+  position: absolute;
+  padding: 0%;
+  margin: 0%;
+  width: 75%;
+  height: 100%; 
+  left: 0;
+  top: 0;
 }
+
+.chat{
+  padding: 0%;
+  margin: 10px;
+  width: 98%;
+  height: 80%; 
+  right: 0;
+  top: 0;
+  background-color: rgb(12,12,15);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat > p, .usernames > p{
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: left;
+}
+
+.chatupload{
+  bottom: 0;
+  margin: 0%;
+  padding: 0%;
+  max-width: 1200px;
+  width: 200%;
+}
+
+.right {
+  position: absolute;
+  padding: 0%;
+  margin: 0%;
+  width: 25%;
+  height: 100%; 
+  right: 0;
+  top: 0;
+}
+
+.usernames {
+  padding: 0%;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 98%;
+  height: 80%; 
+  left: 0;
+  top: 0;
+  background-color: rgb(12,12,15);
+  display: flex;
+  flex-direction: column;
+}
+
