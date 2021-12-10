@@ -1,20 +1,20 @@
 const express = require("express");
 const ejs = require("ejs");
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
 // Create express app
 const app = express();
 
-const client = new Client({
+const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
       rejectUnauthorized: false
     }
 });
   
-client.connect();
+pool.connect();
   
-client.query('SELECT id,username FROM chat.users;', (err, res) => {
+pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
     if (err) throw err;
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
@@ -42,6 +42,20 @@ app.get("/create_account", (req, res) => {
 app.get("/chat", (req, res) => {
     res.render("chat");
 });
+
+app.get('/db', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM users');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
 
 app.post("/insertstudents", (req, res) => {
   let data = { name: req.body.studentName, email: req.body.studentEmail };
