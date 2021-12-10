@@ -112,3 +112,8 @@ a {
   flex-direction: column;
 }
 
+.logout {
+    bottom: 0;
+    margin: 0%;
+    padding: 0%;
+}
