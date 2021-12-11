@@ -66,8 +66,9 @@ app.post("/loginaccount", (req, res) => {
     }
     if (result.length == 0) {
       res.render("index", {error: 1});
+    } else {
+      res.send(`data read successful...`);
     }
-    res.send(`data read successful...`);
     console.log(result.length);
   });
 });
