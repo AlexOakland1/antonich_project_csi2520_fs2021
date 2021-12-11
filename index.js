@@ -43,7 +43,16 @@ app.get("/chat", (req, res) => {
     res.render("chat");
 });
 
-app.post("/createaccount",)
+app.post("/createaccount", (req, res) => {
+  let data = { username: req.body.username, password: req.body.password };
+  let sql = `INSERT INTO users(username,password) values(?);`;
+  let query = pg.query(sql, data, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(`student entry was inserted to the db...`);
+  });
+});
 
 app.post("/loginaccount", (req, res) => {
     
@@ -52,7 +61,7 @@ app.post("/loginaccount", (req, res) => {
 app.post("/insertstudents", (req, res) => {
   let data = { name: req.body.studentName, email: req.body.studentEmail };
   let sql = `INSERT INTO students SET ?`;
-  let client = pg.query(sql, data, (err, result) => {
+  let query = pg.query(sql, data, (err, result) => {
     if (err) {
       throw err;
     }
