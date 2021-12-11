@@ -49,7 +49,7 @@ app.post("/createaccount", (req, res) => {
   let query = db.query(sql, data, (err, result) => {
     if (err) {
       //throw err;
-      res.send(`Invalid Username/Password`);
+      res.render("create_account", {error: 1});
     } else {
       res.send(`student entry was inserted to the db...`);
     }
