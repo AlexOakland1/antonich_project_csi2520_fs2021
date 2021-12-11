@@ -53,6 +53,8 @@ app.post("/createaccount", (req, res) => {
     } else {
       res.send(`student entry was inserted to the db...`);
     }
+    console.log(result);
+    console.log(result.length);
   });
 });
 
@@ -69,6 +71,7 @@ app.post("/loginaccount", (req, res) => {
     } else {
       res.send(`data read successful...`);
     }
+    console.log(result);
     console.log(result.length);
   });
 });
