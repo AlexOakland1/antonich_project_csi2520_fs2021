@@ -44,7 +44,7 @@ app.get("/chat", (req, res) => {
 });
 
 app.post("/createaccount", (req, res) => {
-  let data = { username: req.body.username, password: req.body.password };
+  let data = { username: req.body.username.trim(), password: req.body.password.trim() };
   let sql = `INSERT INTO users SET ?`;
   let query = db.query(sql, data, (err, result) => {
     if (err) {
@@ -57,9 +57,10 @@ app.post("/createaccount", (req, res) => {
 });
 
 app.post("/loginaccount", (req, res) => {
-  let data = { username: req.body.username, password: req.body.password };
-  let sql = `SELECT * FROM students WHERE ?`;
-  let query = db.query(sql, data, (err, result) => {
+  let data1 = req.body.username.trim();
+  let data2 = req.body.password.trim();
+  let sql = `SELECT * FROM students WHERE username = ? AND password = ?`;
+  let query = db.query(sql, [data1, data2], (err, result) => {
     if (err) {
       throw err;
     }
