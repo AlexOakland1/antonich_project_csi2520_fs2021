@@ -62,6 +62,7 @@ app.get("/loginaccount"), (req, res) => {
     client.query(text, values, (err, res) => {
         if (err) {
           console.log(err.stack)
+          res.render("index");
         } else {
           console.log(res.rows[0])
           // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
