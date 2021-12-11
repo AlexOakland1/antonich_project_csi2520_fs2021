@@ -56,7 +56,7 @@ app.get('/db', async (req, res) => {
     }
   })
 
-app.post("/loginaccount"), (req, res) => {
+app.post("/loginaccount", (req, res) => {
     const text = 'select (username, password) from users where username = $1 and password = $2';
     const values = [req.body.username, req.body.password];
     pool.query(text, values, (err, res) => {
@@ -68,8 +68,8 @@ app.post("/loginaccount"), (req, res) => {
           res.render("chat");
           // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
         };
-      })
-}
+      });
+});
 
 app.post("/insertstudents", (req, res) => {
   let data = { name: req.body.studentName, email: req.body.studentEmail };
