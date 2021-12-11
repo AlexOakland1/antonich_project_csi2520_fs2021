@@ -50,8 +50,9 @@ app.post("/createaccount", (req, res) => {
     if (err) {
       //throw err;
       res.send(`Invalid Username/Password`);
+    } else {
+      res.send(`student entry was inserted to the db...`);
     }
-    res.send(`student entry was inserted to the db...`);
   });
 });
 
