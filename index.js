@@ -43,18 +43,18 @@ app.get("/chat", (req, res) => {
     res.render("chat");
 });
 
-app.get('/db', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const result = await client.query('SELECT * FROM users');
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
-    }
-  })
+// app.get('/db', async (req, res) => {
+//     try {
+//       const client = await pool.connect();
+//       const result = await client.query('SELECT * FROM users');
+//       const results = { 'results': (result) ? result.rows : null};
+//       res.render('pages/db', results );
+//       client.release();
+//     } catch (err) {
+//       console.error(err);
+//       res.send("Error " + err);
+//     }
+//   })
 
 app.post("/loginaccount", (req, res) => {
     const text = 'select (username, password) from users where username = $1 and password = $2';
@@ -62,10 +62,8 @@ app.post("/loginaccount", (req, res) => {
     pool.query(text, values, (err, res) => {
         if (err) {
           console.log(err.stack);
-          res.render("index");
         } else {
           console.log(res.rows[0]);
-          res.render("chat");
           // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
         };
       });
