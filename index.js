@@ -59,7 +59,7 @@ app.post("/createaccount", (req, res) => {
 app.post("/loginaccount", (req, res) => {
   let data1 = req.body.username.trim();
   let data2 = req.body.password.trim();
-  let sql = `SELECT * FROM students WHERE username = ? AND password = ?`;
+  let sql = `SELECT * FROM hpdnoqjem0sogc6k WHERE username = ? AND password = ?`;
   let query = db.query(sql, [data1, data2], (err, result) => {
     if (err) {
       throw err;
