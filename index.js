@@ -1,25 +1,25 @@
 const express = require("express");
+const mysql = require("mysql");
 const ejs = require("ejs");
-const { Pool } = require('pg');
 
 // Create express app
 const app = express();
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
+// Create a database connection configuration
+const db = mysql.createConnection({
+  host: "uzb4o9e2oe257glt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "q4qg6aqmwxpj0ori",
+  password: "z7lco4t7rf5ipqy7",
+  database: "hpdnoqjem0sogc6k", // comment out if running example 1
 });
-  
-pool.connect();
-  
-pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-    if (err) throw err;
-    for (let row of res.rows) {
-      console.log(JSON.stringify(row));
-    }
-//    pool.end();
+
+// Establish connection with the DB
+db.connect((err) => {
+  if (err) {
+    throw err;
+  } else {
+    console.log(`Successful connected to the DB....`);
+  }
 });
 
 // Initialize Body Parser Middleware to parse data sent by users in the request object
@@ -43,32 +43,11 @@ app.get("/chat", (req, res) => {
     res.render("chat");
 });
 
-app.post('/db', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const result = await client.query('SELECT * FROM users');
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
-    };
-  });
+app.post("/createaccount",)
 
-
-// app.post("/loginaccount", (req, res) => {
-//     const text = 'select (username, password) from users where username = $1 and password = $2';
-//     const values = [req.body.username, req.body.password];
-//     pool.query(text, values, (err, res) => {
-//         if (err) {
-//           console.log(err.stack);
-//         } else {
-//           console.log(res.rows[0]);
-//           console.log('a');
-//         };
-//       });
-// });
+app.post("/loginaccount", (req, res) => {
+    
+});
 
 app.post("/insertstudents", (req, res) => {
   let data = { name: req.body.studentName, email: req.body.studentEmail };
