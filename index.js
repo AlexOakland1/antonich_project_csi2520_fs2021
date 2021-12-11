@@ -48,7 +48,8 @@ app.post("/createaccount", (req, res) => {
   let sql = `INSERT INTO users SET ?`;
   let query = db.query(sql, data, (err, result) => {
     if (err) {
-      throw err;
+      //throw err;
+      res.send(`Invalid Username/Password`);
     }
     res.send(`student entry was inserted to the db...`);
   });
