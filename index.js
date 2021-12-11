@@ -64,6 +64,7 @@ app.post("/loginaccount", (req, res) => {
           console.log(err.stack);
         } else {
           console.log(res.rows[0]);
+          console.log('a');
         };
       });
 });
