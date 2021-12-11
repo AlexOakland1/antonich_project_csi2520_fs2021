@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create_account", (req, res) => {
-    res.render("create_account");
+  res.render("create_account", {error: 0});
 });
 
 app.get("/chat", (req, res) => {
