@@ -45,7 +45,7 @@ app.get("/chat", (req, res) => {
 
 app.post("/createaccount", (req, res) => {
   let data = { username: req.body.username, password: req.body.password };
-  let sql = `INSERT INTO users(username,password) values(?);`;
+  let sql = `INSERT INTO users SET ?`;
   let query = db.query(sql, data, (err, result) => {
     if (err) {
       throw err;
