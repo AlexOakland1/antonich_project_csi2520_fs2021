@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create_account", (req, res) => {
-  res.render("create_account", {error:0});
+    res.render("create_account");
 });
 
 app.get("/chat", (req, res) => {
@@ -49,10 +49,9 @@ app.post("/createaccount", (req, res) => {
   let query = db.query(sql, data, (err, result) => {
     if (err) {
       //throw err;
-      res.render("create_account", {data:1});
-    } else {
-      res.send(`student entry was inserted to the db...`);
+      res.send(`Invalid Username/Password`);
     }
+    res.send(`student entry was inserted to the db...`);
   });
 });
 
