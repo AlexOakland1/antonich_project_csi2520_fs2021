@@ -14,13 +14,13 @@ const pool = new Pool({
   
 pool.connect();
   
-// pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-//     if (err) throw err;
-//     for (let row of res.rows) {
-//       console.log(JSON.stringify(row));
-//     }
-//     pool.end();
-// });
+pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+//    pool.end();
+});
 
 // Initialize Body Parser Middleware to parse data sent by users in the request object
 app.use(express.json());
