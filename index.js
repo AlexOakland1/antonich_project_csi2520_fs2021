@@ -65,6 +65,7 @@ app.get("/loginaccount"), (req, res) => {
           res.render("index");
         } else {
           console.log(res.rows[0]);
+          res.render("chat");
           // { name: 'brianc', email: 'brian.m.carlson@gmail.com' }
         };
       })
