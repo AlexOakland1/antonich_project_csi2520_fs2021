@@ -56,7 +56,7 @@ app.get('/db', async (req, res) => {
     }
   })
 
-app.post("/loginaccount"), (req, res) => {
+app.get("/loginaccount"), (req, res) => {
     const text = 'select (username, password) from users where username = $1 and password = $2';
     const values = [req.body.username, req.body.password];
     client.query(text, values, (err, res) => {
