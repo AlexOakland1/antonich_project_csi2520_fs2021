@@ -20,7 +20,9 @@
                 </form>
                 <% if (error = 21) { %>
                     <p> Invalid Login. Either you left a field empty, or your current username is already taken.</p>
-                <%}%>
+                <%}else { %>
+                    <p> success </p>
+                <% } %>
                 <p>For security reasons, do NOT use a username or password tied to your real social media accounts.</p>
                 <p>Already have an account?</p>
                 <a href="/">Login to your account.</i></a>
