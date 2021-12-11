@@ -57,7 +57,14 @@ app.post("/createaccount", (req, res) => {
 });
 
 app.post("/loginaccount", (req, res) => {
-    
+  let data = { username: req.body.username, password: req.body.password };
+  let sql = `SELECT * FROM students WHERE ?`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.send(`data read successful...`);
+  });
 });
 
 app.post("/insertstudents", (req, res) => {
