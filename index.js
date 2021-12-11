@@ -65,6 +65,7 @@ app.post("/loginaccount", (req, res) => {
       throw err;
     }
     res.send(`data read successful...`);
+    console.log(result);
   });
 });
 
