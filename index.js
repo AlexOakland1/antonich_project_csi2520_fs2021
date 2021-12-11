@@ -19,7 +19,7 @@ pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (er
     for (let row of res.rows) {
       console.log(JSON.stringify(row));
     }
-    client.end();
+    pool.end();
 });
 
 // Initialize Body Parser Middleware to parse data sent by users in the request object
