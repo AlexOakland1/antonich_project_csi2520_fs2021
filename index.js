@@ -32,7 +32,7 @@ app.use("/public", express.static(__dirname + "/public"));
 
 // routes
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {error: 0});
 });
 
 app.get("/create_account", (req, res) => {
@@ -63,6 +63,9 @@ app.post("/loginaccount", (req, res) => {
   let query = db.query(sql, [data1, data2], (err, result) => {
     if (err) {
       throw err;
+    }
+    if (result.length == 0) {
+      res.render("index", {error: 1});
     }
     res.send(`data read successful...`);
     console.log(result.length);
