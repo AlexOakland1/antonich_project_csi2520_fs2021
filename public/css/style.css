@@ -80,10 +80,6 @@ a {
   text-align: left;
 }
 
-.usernames > input[type=submit]{
-  width: 75%;
-}
-
 .chatupload{
   bottom: 0;
   margin: 0%;
@@ -120,4 +116,13 @@ a {
     bottom: 0;
     margin: 0%;
     padding: 0%;
+}
+
+.logout > input[type=submit]{
+  width: 75%;
+  font-size: 20px;
+  padding: 10px;
+  color: rgb(214,238,255);
+  background-color: rgb(12,12,15);
+  border: 0px;
 }
