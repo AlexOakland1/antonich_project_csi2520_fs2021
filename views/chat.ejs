@@ -6,21 +6,22 @@
         <title>Chat Simulator</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="../public/js/chat.js" defer></script>
         <link rel="stylesheet" href="../public/css/style copy.css">
     </head>
     <body>
         <article>
             <div class="left">
-                <div class="chat">
+                <div class="chat" id="chat">
                     <p>test 1</p>
                     <p>test 2</p>
                     <p>test 3</p>
-                    <br id="container">
+                    <br id="containerbar">
                 </div>
                 <div class="chatupload">
                     <form>
-                        <input type="text" name="chatbox" class="chatbox" placeholder="Chat..."><br>
-                        <input type="button" name="upload" value="Upload">
+                        <input type="text" name="chatbox" class="chatbox" id="chatbox" placeholder="Chat..."><br>
+                        <input type="button" name="upload" id="upload" value="Upload">
                     </form>
                 </div>
             </div>
