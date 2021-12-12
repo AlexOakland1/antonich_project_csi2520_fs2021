@@ -82,7 +82,7 @@ app.post("/loginaccount", (req, res) => {
   });
 });
 
-app.post("/logout", (req, res) => {
+app.get("/logout", (req, res) => {
   res.render("index", {error: 0});
 });
 
