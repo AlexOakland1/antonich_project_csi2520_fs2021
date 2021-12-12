@@ -5,7 +5,7 @@ let bar = document.querySelector('#containerbar');
 
 chatButton.addEventListener('click', function () {
     let chatmsg = document.createElement('p');
-    let chatText = document.createTextNode(user + chatBox.value);
+    let chatText = document.createTextNode(user + ":  " + chatBox.value);
     chatmsg.appendChild(chatText);
     chatSpace.insertBefore(chatmsg, bar);
 })
