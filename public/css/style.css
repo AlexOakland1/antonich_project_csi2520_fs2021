@@ -72,7 +72,7 @@ a {
   flex-direction: column;
 }
 
-.chat > p, .usernames > p{
+.chat > p, .usernames > li{
   margin-top: 0px;
   margin-bottom: 20px;
   margin-left: 20px;
