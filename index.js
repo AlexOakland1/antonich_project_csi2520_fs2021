@@ -69,7 +69,7 @@ app.post("/loginaccount", (req, res) => {
     if (result.length == 0) {
       res.render("index", {error: 1});
     } else {
-      res.send(`data read successful...`);
+      res.render("chat", {user: data1});
     }
     console.log(result);
     console.log(result.length);
