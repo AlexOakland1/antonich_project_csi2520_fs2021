@@ -9,3 +9,8 @@ chatButton.addEventListener('click', function () {
     chatmsg.appendChild(chatText);
     articleContainer.insertBefore(chatmsg, bar);
 })
+
+let chatmsg = document.createElement('p');
+let chatText = document.createTextNode(chatBox.value);
+chatmsg.appendChild(chatText);
+articleContainer.insertBefore(chatmsg, bar);
