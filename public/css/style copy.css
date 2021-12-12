@@ -38,6 +38,10 @@ input[type=text], input[type=password]{
   width: 75%;
 }
 
+input[type=submit]{
+  cursor: pointer;
+}
+
 a {
   color: rgb(61,144,198);
   text-decoration: none;
