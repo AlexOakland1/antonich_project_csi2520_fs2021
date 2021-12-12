@@ -62,6 +62,7 @@ app.post("/loginaccount", (req, res) => {
   let data1 = req.body.username.trim();
   let data2 = req.body.password.trim();
   let sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
+  let sqllist =  'SELECT username FROM users';
   let query = db.query(sql, [data1, data2], (err, result) => {
     if (err) {
       throw err;
@@ -69,7 +70,9 @@ app.post("/loginaccount", (req, res) => {
     if (result.length == 0) {
       res.render("index", {error: 1});
     } else {
-      res.render("chat", {user: data1});
+      db.query(sqllist, (err, result2) => {
+        res.render("chat", {user: data1, data: result2});
+      });
     }
     console.log(result);
     console.log(result.length);
