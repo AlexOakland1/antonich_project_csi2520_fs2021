@@ -80,6 +80,10 @@ a {
   text-align: left;
 }
 
+.usernames > input[type=submit]{
+  width: 75%;
+}
+
 .chatupload{
   bottom: 0;
   margin: 0%;
