@@ -24,6 +24,15 @@ div {
   width: 500px;
 }
 
+.logout > input, .logout > form{
+  width: 75%;
+  font-size: 20px;
+  padding: 10px;
+  color: rgb(214,238,255);
+  background-color: rgb(12,12,15);
+  border: 0px;
+}
+
 input{
   font-size: 20px;
   padding: 10px;
@@ -116,13 +125,4 @@ a {
     bottom: 0;
     margin: 0%;
     padding: 0%;
-}
-
-.logout > input, .logout > form{
-  width: 75%;
-  font-size: 20px;
-  padding: 10px;
-  color: rgb(214,238,255);
-  background-color: rgb(12,12,15);
-  border: 0px;
 }
