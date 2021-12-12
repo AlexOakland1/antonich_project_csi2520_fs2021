@@ -118,7 +118,7 @@ a {
     padding: 0%;
 }
 
-.logout > input[type=submit]{
+.logout > input{
   width: 75%;
   font-size: 20px;
   padding: 10px;
