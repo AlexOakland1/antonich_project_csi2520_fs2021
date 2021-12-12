@@ -48,12 +48,15 @@ app.post("/createaccount", (req, res) => {
   let data1 = req.body.username.trim();
   let data2 = req.body.password.trim();
   let sql = `INSERT INTO users SET ?`;
+  let sqllist =  'SELECT username FROM users';
   let query = db.query(sql, data, (err, result) => {
     if (err) {
       //throw err;
       res.render("create_account", {error: 1});
     } else {
-      res.render("chat", {user: data1});
+      db.query(sqllist, (err, result2) => {
+        res.render("chat", {user: data1, data: result2});
+      });
     }
   });
 });
@@ -77,6 +80,10 @@ app.post("/loginaccount", (req, res) => {
     console.log(result);
     console.log(result.length);
   });
+});
+
+app.post("/logout", (req, res) => {
+  res.render("index", {error: 0});
 });
 
 app.post("/insertstudents", (req, res) => {
