@@ -67,6 +67,7 @@ a {
   background-color: rgb(12,12,15);
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 .chat > p, .usernames > li, .usernames > ul{
