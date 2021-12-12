@@ -24,7 +24,7 @@ div {
   width: 500px;
 }
 
-.logout > input, .logout > form{
+.logoutbox > input{
   width: 75%;
   font-size: 20px;
   padding: 10px;
@@ -121,7 +121,7 @@ a {
   flex-direction: column;
 }
 
-.logout {
+.logoutbox {
     bottom: 0;
     margin: 0%;
     padding: 0%;
