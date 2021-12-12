@@ -45,16 +45,16 @@ app.get("/chat", (req, res) => {
 
 app.post("/createaccount", (req, res) => {
   let data = { username: req.body.username.trim(), password: req.body.password.trim() };
+  let data1 = req.body.username.trim();
+  let data2 = req.body.password.trim();
   let sql = `INSERT INTO users SET ?`;
   let query = db.query(sql, data, (err, result) => {
     if (err) {
       //throw err;
       res.render("create_account", {error: 1});
     } else {
-      res.send(`student entry was inserted to the db...`);
+      res.render("chat", {user: data1});
     }
-    console.log(result);
-    console.log(result.length);
   });
 });
 
