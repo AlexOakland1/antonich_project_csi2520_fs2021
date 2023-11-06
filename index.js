@@ -7,10 +7,10 @@ const app = express();
 
 // Create a database connection configuration
 const db = mysql.createConnection({
-  host: "uzb4o9e2oe257glt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-  user: "q4qg6aqmwxpj0ori",
-  password: "z7lco4t7rf5ipqy7",
-  database: "hpdnoqjem0sogc6k", // comment out if running example 1
+  host: "q0h7yf5pynynaq54.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "cfcdznqkh8ac91s9",
+  password: "tlus0vayfvp3oyc4",
+  database: "lqtos5ojoc7yxe56", // comment out if running example 1
 });
 
 // Establish connection with the DB
