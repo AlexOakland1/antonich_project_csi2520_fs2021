@@ -26,22 +26,26 @@ chatButton.addEventListener('click', function () {
 
 // encryption function
 function encryptMessage(message, key) {
-    let encryptedMessage = '';
-    for (let i = 0; i < message.length; i++) {
-        const charCode = message.charCodeAt(i);
+    let caesarMessage = '';
+    let base64Message = window.btoa(message);
+    for (let i = 0; i < base64Message.length; i++) {
+        const charCode = base64Message.charCodeAt(i);
         const encryptedCharCode = charCode + key;
-        encryptedMessage += String.fromCharCode(encryptedCharCode);
+        caesarMessage += String.fromCharCode(encryptedCharCode);
     }
+    let encryptedMessage = window.btoa(caesarMessage);
     return encryptedMessage;
 }
 
 // decryption function
 function decryptMessage(encryptedMessage, key) {
-    let decryptedMessage = '';
-    for (let i = 0; i < encryptedMessage.length; i++) {
-        const charCode = encryptedMessage.charCodeAt(i);
+    let caesarMessage = window.atob(encryptedMessage);
+    let base64Message = '';
+    for (let i = 0; i < caesarMessage.length; i++) {
+        const charCode = caesarMessage.charCodeAt(i);
         const decryptedCharCode = charCode - key;
-        decryptedMessage += String.fromCharCode(decryptedCharCode);
+        base64Message += String.fromCharCode(decryptedCharCode);
     }
+    let decryptedMessage = window.atob(base64Message);
     return decryptedMessage;
 }
