@@ -2,7 +2,7 @@ body {
   background-color: rgb(12,12,15);
   color: rgb(214,238,255);
   text-align: center;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Lato", 'Noto Sans', Helvetica, Arial, sans-serif;
   src: url(../fonts/Lato-Regular.ttf);
   font-size: 20px;
 }
