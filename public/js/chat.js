@@ -44,3 +44,4 @@ function decryptMessage(encryptedMessage, key) {
         decryptedMessage += String.fromCharCode(decryptedCharCode);
     }
     return decryptedMessage;
+}
