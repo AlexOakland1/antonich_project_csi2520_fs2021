@@ -2,82 +2,74 @@ let chatSpace = document.querySelector('#chat');
 let chatBox = document.querySelector('#chatbox');
 let bar = document.querySelector('#containerbar');
 
-function getMessageEncoding() {
-    const messageBox = document.querySelector("#chatbox");
-    let message = messageBox.value;
-    let enc = new TextEncoder();
-    return enc.encode(message);
-  }
-
-  async function encryptMessage(key) {
-    let encoded = getMessageEncoding();
-    ciphertext = await window.crypto.subtle.encrypt(
-      {
-        name: "RSA-OAEP"
-      },
-      key,
-      encoded
-    );
-
-    let buffer = new Uint8Array(ciphertext, 0, 20);
-    let chatmsg = document.createElement('p');
-    let chatText = document.createTextNode(user + "(Encrypted message): " + `${buffer}...[${ciphertext.byteLength} bytes total]`); // Display the encrypted message
-    chatmsg.appendChild(chatText);
-    chatSpace.insertBefore(chatmsg, bar);
-  }
-
-async function decryptMessage(key) {
-    let decrypted = await window.crypto.subtle.decrypt(
-      {
-        name: "RSA-OAEP"
-      },
-      key,
-      ciphertext
-    );
-
-    let dec = new TextDecoder();
-    //const decryptedValue = document.querySelector(".rsa-oaep .decrypted-value");
-    //decryptedValue.textContent = dec.decode(decrypted);
-    let chatmsg = document.createElement('p');
-    let chatText = document.createTextNode(user + "(Decrypted message): " + dec.decode(decrypted)); // Display the encrypted message
-    chatmsg.appendChild(chatText);
-    chatSpace.insertBefore(chatmsg, bar);
-  }
-
-
-window.crypto.subtle.generateKey(
+function encryptMessage(message, publicKey) {
+  return window.crypto.subtle.encrypt(
     {
-    name: "RSA-OAEP",
-    // Consider using a 4096-bit key for systems that require long-term security
-    modulusLength: 2048,
-    publicExponent: new Uint8Array([1, 0, 1]),
-    hash: "SHA-256",
+      name: "RSA-OAEP"
     },
-    true,
-    ["encrypt", "decrypt"]
-  ).then((keyPair) => {
-    let chatButton = document.querySelector('#upload');
-    chatButton.addEventListener("click", () => {
-      encryptMessage(keyPair.publicKey).then(() => {decryptMessage(keyPair.privateKey);
+    publicKey,
+    new TextEncoder().encode(message)
+  );
+}
+
+console.log(publickey);
+
+// Assuming the user and publicKey are obtained from the server
+let username = user; // Replace with the actual username
+let publicKey; // Replace with the actual public key received from the server
+
+// Fetch the public key before allowing the user to send messages
+async function fetchPublicKey() {
+  try {
+    const response = await fetch('/publicKey', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: username }) // Pass the current username
+    });
+
+    const data = await response.json();
+
+    console.log(data); // Log the data received from the server
+
+    if (data.publicKey) {
+      // Use btoa() to encode binary data to base64
+      publicKey = await crypto.subtle.importKey(
+        'spki',
+        btoa(String.fromCharCode.apply(null, new Uint8Array(data.publicKey))),
+        { name: 'RSA-OAEP', hash: { name: 'SHA-256' } },
+        true,
+        ['encrypt']
+      );
+    } else {
+      console.error("Public key not received from the server");
+    }
+  } catch (error) {
+    console.error("Error fetching public key:", error);
+  }
+}
+
+fetchPublicKey().then(() => {
+  let chatButton = document.querySelector('#upload');
+  chatButton.addEventListener("click", () => {
+    const userMessage = chatBox.value;
+    encryptMessage(userMessage, publicKey).then((encryptedMessageBuffer) => {
+      const encryptedMessageBase64 = Buffer.from(encryptedMessageBuffer).toString('base64');
+
+      // Send the encrypted message to the server
+      fetch('/sendmessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, message: encryptedMessageBase64 })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Optionally, you can display a success message or handle the response accordingly
+          console.log("Message sent successfully");
+        } else {
+          console.error("Failed to send message");
+        }
       });
     });
   });
-// chatButton.addEventListener('click', function () {
-//     // user's input
-//     const userMessage = chatBox.value;
-//
-//     // encrypt user's message
-//     const encryptedMessage = encryptMessage(keyPair.publicKey);
-//
-//     let chatmsg = document.createElement('p');
-//     let chatText = document.createTextNode(user + "(Encrypted message): " + encryptedMessage); // Display the encrypted message
-//     chatmsg.appendChild(chatText);
-//     chatSpace.insertBefore(chatmsg, bar);
-//
-//    // decrypt and display message
-//    const decryptedMessage = decryptMessage(encryptedMessage, encryptionKey);
-//    let decryptedChatMsg = document.createElement('p');
-//    let decryptedChatText = document.createTextNode(user + " (Decrypted message): " + decryptedMessage);
-//    decryptedChatMsg.appendChild(decryptedChatText);
-//    chatSpace.insertBefore(decryptedChatMsg, bar);
-// });
+});
