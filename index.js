@@ -6,15 +6,25 @@ const generateKeyPairPromise = util.promisify(crypto.generateKeyPair);
 const ejs = require("ejs");
 const scrypt = util.promisify(crypto.scrypt);
 const config = require('config');
+const aws = require('aws-sdk');
 
 // Create express app
 const app = express();
 
+// import config variables from heroku
+let s3 = new aws.S3({
+  host: process.env.JAWSDV_HOST,
+  user: process.env.JAWSDV_USER,
+  password: process.env.JAWSDV_PASSWORD,
+  database: process.env.JAWSDV_DB
+});
+
 // get config from config/config.json
-const dbConfig = config.get('Database.dbConfig');
+//const dbConfig = config.get('Database.dbConfig');
 
 // Create a database connection configuration
-const db = mysql.createConnection(dbConfig);
+const db = mysql.createConnection(s3);
+//const db = mysql.createConnection(dbConfig);
 
 // Establish connection with the DB
 db.connect((err) => {
