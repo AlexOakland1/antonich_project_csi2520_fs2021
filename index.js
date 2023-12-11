@@ -5,17 +5,16 @@ const crypto = require('crypto');
 const generateKeyPairPromise = util.promisify(crypto.generateKeyPair);
 const ejs = require("ejs");
 const scrypt = util.promisify(crypto.scrypt);
+const config = require('config');
 
 // Create express app
 const app = express();
 
+// get config from config/config.json
+const dbConfig = config.get('Database.dbConfig');
+
 // Create a database connection configuration
-const db = mysql.createConnection({
-  host: "q0h7yf5pynynaq54.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-  user: "cfcdznqkh8ac91s9",
-  password: "tlus0vayfvp3oyc4",
-  database: "lqtos5ojoc7yxe56", // comment out if running example 1
-});
+const db = mysql.createConnection(dbConfig);
 
 // Establish connection with the DB
 db.connect((err) => {
