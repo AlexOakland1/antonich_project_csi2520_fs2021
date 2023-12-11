@@ -13,10 +13,10 @@ const app = express();
 
 // import config variables from heroku
 let s3 = new aws.S3({
-  host: process.env.JAWSDV_HOST,
-  user: process.env.JAWSDV_USER,
-  password: process.env.JAWSDV_PASSWORD,
-  database: process.env.JAWSDV_DB
+  host: process.env.JAWSDB_HOST,
+  user: process.env.JAWSDB_USER,
+  password: process.env.JAWSDB_PASSWORD,
+  database: process.env.JAWSDB_DB
 });
 
 // get config from config/config.json
