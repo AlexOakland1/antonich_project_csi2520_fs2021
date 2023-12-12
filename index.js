@@ -19,7 +19,7 @@ let s3 = new aws.S3({
   database: process.env.JAWSDB_DB
 });
 
-console.log(s3);
+console.log(s3.process.env.JAWSDB_HOST);
 
 // get config from config/config.json
 //const dbConfig = config.get('Database.dbConfig');
