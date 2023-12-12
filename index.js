@@ -19,13 +19,16 @@ let s3 = new aws.S3({
   database: process.env.JAWSDB_DB
 });
 
-console.log(Object.getOwnPropertyNames(s3.config));
-
 // get config from config/config.json
 //const dbConfig = config.get('Database.dbConfig');
 
 // Create a database connection configuration
-const db = mysql.createConnection(s3);
+const db = mysql.createConnection({
+  host: s3.config.host,
+  user: s3.config.user,
+  password: s3.config.password,
+  database: s3.config.database, // comment out if running example 1
+});
 //const db = mysql.createConnection(dbConfig);
 
 // Establish connection with the DB
