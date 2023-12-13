@@ -28,11 +28,7 @@
             <div class="right">
                 <div class="usernames">
                     <p>Users:</p>
-                    <ul class="list-group">
-                        <%data.forEach((item)=>{%>
-                        <li class="list-group-item"> <%=item.username%></li>
-                        <%});%>
-                    </ul>
+                    <ul id="usernameList"></ul>
                 </div>
                 <div class="logoutbox">
                     <p><%= user %></p>
