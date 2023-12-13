@@ -11,8 +11,7 @@ const aws = require('aws-sdk');
 // Create express app
 const app = express();
 
-// get config from heroku env vars
-import config variables from heroku
+// import config variables from heroku
 let s3 = new aws.S3({
   host: process.env.JAWSDB_HOST,
   user: process.env.JAWSDB_USER,
