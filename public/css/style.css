@@ -1,116 +1,128 @@
 body {
-  background-color: #282c34;
-  color: #d8e5ff;
+  background-color: rgb(12,12,15);
+  color: rgb(214,238,255);
   text-align: center;
   font-family: "Lato", 'Noto Sans', Helvetica, Arial, sans-serif;
   src: url(../fonts/Lato-Regular.ttf);
-  font-size: 18px;
+  font-size: 20px;
 }
 
 h1 {
-  font-size: 50px;
-  margin-top: 5%;
+  font-size: 60px;
+  margin-top: 10%;
 }
 
 div {
-  background-color: #1a1d26;
+  background-color: rgb(22,24,33);
   display: inline-block;
-  padding: 20px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  padding-left: 50px;
 }
 
-.login {
-  width: 400px;
+.login{
+  width: 500px;
 }
 
-.logoutbox input,
-input {
-  width: 100%;
-  font-size: 16px;
-  padding: 8px;
-  color: #d8e5ff;
-  background-color: #282c34;
-  border: 1px solid #61dafb;
-  margin-top: 10px;
-}
-
-input[type=submit] {
-  width: 100%;
+.logoutbox input{
+  width: 75%;
+  font-size: 20px;
   padding: 10px;
-  background-color: #61dafb;
+  color: rgb(214,238,255);
+  background-color: rgb(12,12,15);
+  border: 0px;
+}
+
+input{
+  font-size: 20px;
+  padding: 10px;
+  color: rgb(214,238,255);
+  background-color: rgb(12,12,15);
+  border: 0px;
+}
+
+input[type=text], input[type=password]{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  width: 75%;
+}
+
+input[type=submit]{
+  width: 25%;
+  padding: 10px;
+  background-color: rgb(42,46,63);
   cursor: pointer;
 }
 
 a {
-  color: #61dafb;
+  color: rgb(61,144,198);
   text-decoration: none;
 }
 
 .left {
   position: absolute;
-  padding: 0;
-  margin: 0;
-  width: 70%;
+  padding: 0%;
+  margin: 0%;
+  width: 75%;
   height: 100%;
   left: 0;
   top: 0;
 }
 
-.chat {
-  padding: 20px;
-  margin: 10px;
-  width: 90%;
+.chat{
+  padding: 0%;
+  margin: 200px;
+  width: 98%;
   height: 80%;
   right: 0;
   top: 0;
-  background-color: #1a1d26;
+  background-color: rgb(12,12,15);
   display: flex;
   flex-direction: column;
 }
 
-.chat > p,
-.usernames > li,
-.usernames > ul {
+.chat > p, .usernames > li, .usernames > ul{
   margin-top: 0px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   text-align: left;
 }
 
-.chatupload {
+.chatupload{
   bottom: 0;
-  margin: 0;
-  padding: 0;
-  max-width: 800px;
-  width: 100%;
+  margin: 0%;
+  padding: 0%;
+  max-width: 1200px;
+  width: 200%;
 }
 
 .right {
   position: absolute;
-  padding: 0;
-  margin: 0;
-  width: 30%;
+  padding: 0%;
+  margin: 0%;
+  width: 25%;
   height: 100%;
   right: 0;
   top: 0;
 }
 
 .usernames {
-  padding: 0;
+  padding: 0%;
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  width: 100%;
+  width: 98%;
   height: 80%;
   left: 0;
   top: 0;
-  background-color: #1a1d26;
+  background-color: rgb(12,12,15);
   display: flex;
   flex-direction: column;
 }
 
 .logoutbox {
-  bottom: 0;
-  margin: 0;
-  padding: 0;
+    bottom: 0;
+    margin: 0%;
+    padding: 0%;
 }
