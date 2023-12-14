@@ -8,30 +8,48 @@ const scrypt = util.promisify(crypto.scrypt);
 const config = require('config');
 const aws = require('aws-sdk');
 
+let publicKey, privateKey;
+
+crypto.generateKeyPair('rsa', {
+  modulusLength: 1024,
+  publicKeyEncoding: {
+    type: 'spki',
+    format: 'pem'
+  },
+  privateKeyEncoding: {
+    type: 'pkcs8',
+    format: 'pem'
+  }
+}, (err, pubKey, privKey) => {
+  if (err) throw err;
+
+  publicKey = pubKey;
+  privateKey = privKey;
+  console.log('RSA key pair generated successfully');
+});
+
 // Create express app
 const app = express();
 
 // import config variables from heroku
-let s3 = new aws.S3({
-  host: process.env.JAWSDB_HOST,
-  user: process.env.JAWSDB_USER,
-  password: process.env.JAWSDB_PASSWORD,
-  database: process.env.JAWSDB_DB
-});
+// let s3 = new aws.S3({
+//   host: process.env.JAWSDB_HOST,
+//   user: process.env.JAWSDB_USER,
+//   password: process.env.JAWSDB_PASSWORD,
+//   database: process.env.JAWSDB_DB
+// });
 
 // get config from config/config.json
-//const dbConfig = config.get('Database.dbConfig');
+const dbConfig = config.get('Database.dbConfig');
 
-//Create a database connection configuration based on heroku vars
-const db = mysql.createConnection({
-  host: s3.config.host,
-  user: s3.config.user,
-  password: s3.config.password,
-  database: s3.config.database,
-});
-
-// connect to db based on local config, only used for development
-//const db = mysql.createConnection(dbConfig);
+// Create a database connection configuration
+// const db = mysql.createConnection({
+//   host: s3.config.host,
+//   user: s3.config.user,
+//   password: s3.config.password,
+//   database: s3.config.database, // comment out if running example 1
+// });
+const db = mysql.createConnection(dbConfig);
 
 // Establish connection with the DB
 db.connect((err) => {
@@ -131,8 +149,14 @@ app.post("/logout", (req, res) => {
 app.post("/sendmessage", (req, res) => {
   const username = req.body.username.trim();
   const message = req.body.message.trim();
+
+  console.log("Message: " + message);
+  // Encrypt the message with the public key
+  const encryptedMessage = crypto.publicDecrypt(publicKey, Buffer.from(message, 'utf8')).toString('base64');
+  console.log(encryptedMessage);
+
   const insertMessage = "INSERT INTO messages (username, message) VALUES (?, ?)";
-  db.query(insertMessage, [username, message], (err, result) => {
+  db.query(insertMessage, [username, encryptedMessage], (err, result) => {
     if (err) {
       console.error('Error inserting message:', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -153,7 +177,16 @@ app.post("/sendmessage", (req, res) => {
   });
 });
 
+app.get("/publickey", (req, res) => {
+  console.log('Server Public Key:', publicKey);
+  res.json({ publicKey });
+});
 
 // Setup server ports
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+
+  // Log the public key for reference
+  console.log('Server Public Key:', publicKey);
+});
